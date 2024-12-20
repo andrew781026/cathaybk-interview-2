@@ -147,6 +147,7 @@ will be using it?
 
 ### answer
 
+```
 The <section> and <article> tags in HTML have distinct purposes and are used to structure content semantically:
 
 Key Differences
@@ -161,6 +162,7 @@ Examples: a chapter of a book, a tab in a multi-tab interface, or a section in a
 Represents a self-contained, reusable piece of content that could stand alone outside the document.
 Typically used for blog posts, news articles, or forum posts.
 Content within <article> should make sense on its own and be shareable independently.
+```
 
 ## 5. css boxing model
 
