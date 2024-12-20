@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import dayjs, { Dayjs } from 'dayjs';
-
-const noop = () => {};
+import { noop } from '@/helper/noop.ts';
+import { getMonthWeekArray, getWeekArray } from '@/helper/date.ts';
 
 // Styled Components
 const Layout = styled.div`
@@ -30,7 +30,7 @@ const MonthSelect = styled.button`
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
 
   &:hover {
-    background-color: #e6e6e6;
+    background-color: ${(props) => (props.disabled ? undefined : '#e6e6e6')};
   }
 `;
 
@@ -60,26 +60,11 @@ const DayButton = styled.button<{
 `;
 
 interface DatePickerProps {
-  // defaultStartDate?: Date | string;
-  // defaultEndDate?: Date;
+  limitStartDate?: Date;
+  limitEndDate?: Date;
   disabledDate?: (date: Date) => boolean;
   onDateChange?: (startDate?: Date, endDate?: Date) => void;
 }
-
-// helper function
-const getWeekArray = (date: dayjs.Dayjs): dayjs.Dayjs[] => {
-  const startOfWeek = date.startOf('week');
-  return Array.from({ length: 7 }).map((_, index) =>
-    startOfWeek.add(index, 'day')
-  );
-};
-
-const getMonthWeekArray = (lookingMonth: dayjs.Dayjs): dayjs.Dayjs[] => {
-  const startWeek = dayjs(lookingMonth).startOf('week');
-  return Array.from({ length: 5 }).map((_, index) =>
-    startWeek.add(index * 7, 'day')
-  );
-};
 
 // React Component
 const DatePicker: React.FC<DatePickerProps> = (props) => {
@@ -101,18 +86,61 @@ const DatePicker: React.FC<DatePickerProps> = (props) => {
     [lookingMonth]
   );
 
+  const isPrevDisabled = useMemo(() => {
+    const limitStartDate = props.limitStartDate;
+    const firstDayInViewMonth = dateArray[0][0];
+
+    if (!limitStartDate) return false;
+
+    if (!firstDayInViewMonth)
+      throw new Error(
+        'Ops... Something wrong !!! firstDayInViewMonth is undefined'
+      );
+
+    if (
+      firstDayInViewMonth.isSame(limitStartDate, 'day') ||
+      firstDayInViewMonth.isBefore(limitStartDate, 'day')
+    )
+      return true;
+    else return false;
+  }, [props.limitStartDate, lookingMonth]);
+
+  const isNextDisabled = useMemo(() => {
+    const limitEndDate = props.limitEndDate;
+    const lastDayInViewMonth = dateArray?.at(-1)?.at(-1);
+
+    if (!limitEndDate) return false;
+
+    if (!lastDayInViewMonth)
+      throw new Error(
+        'Ops... Something wrong !!! lastDayInViewMonth is undefined'
+      );
+
+    if (
+      lastDayInViewMonth.isSame(limitEndDate, 'day') ||
+      lastDayInViewMonth.isAfter(limitEndDate, 'day')
+    )
+      return true;
+    else return false;
+  }, [props.limitEndDate, lookingMonth]);
+
   useEffect(() => {
-    // props.onDateChange(startDate, endDate);
+    props.onDateChange?.(startDate, endDate);
     return noop;
   }, [startDate, endDate]);
 
   const prevMonth = () => setLookingMonth(dayjs(lookingMonth).add(-1, 'month'));
   const nextMonth = () => setLookingMonth(dayjs(lookingMonth).add(1, 'month'));
   const pickDate = (target: Dayjs) => () => {
+    if (startDate && target.isSame(startDate, 'day'))
+      return setStartDate(undefined);
+    if (endDate && target.isSame(endDate, 'day')) return setEndDate(undefined);
+
     if (!startDate) return setStartDate(target.toDate());
-    else if (startDate && target.isBefore(startDate, 'day'))
+    if (startDate && target.isBefore(startDate, 'day'))
       return setStartDate(target.toDate());
-    else return setEndDate(target.toDate());
+
+    return setEndDate(target.toDate());
   };
 
   const checkIsActive = (target: Dayjs) => {
@@ -129,9 +157,13 @@ const DatePicker: React.FC<DatePickerProps> = (props) => {
   return (
     <Layout key={title}>
       <Header>
-        <MonthSelect onClick={prevMonth}>&lt;</MonthSelect>
+        <MonthSelect onClick={prevMonth} disabled={isPrevDisabled}>
+          &lt;
+        </MonthSelect>
         <span>{title}</span>
-        <MonthSelect onClick={nextMonth}>&gt;</MonthSelect>
+        <MonthSelect onClick={nextMonth} disabled={isNextDisabled}>
+          &gt;
+        </MonthSelect>
       </Header>
       {dateArray.map((weekArray, index) => (
         <div
