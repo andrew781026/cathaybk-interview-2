@@ -223,6 +223,129 @@ stylesheet.
 > Can you introducing some of Semantic HTML elements that you already know and how you
 used it ever, please make some example.
 
+```
+1. <header>
+Represents the header of a document or section. It often contains introductory content, navigation links, or logos.
+
+Example:
+
+html
+複製程式碼
+<header>
+  <h1>My Website</h1>
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+2. <nav>
+Represents a block of navigation links, typically to other parts of the site or page.
+
+Example:
+
+html
+複製程式碼
+<nav>
+  <ul>
+    <li><a href="#section1">Section 1</a></li>
+    <li><a href="#section2">Section 2</a></li>
+    <li><a href="#section3">Section 3</a></li>
+  </ul>
+</nav>
+3. <article>
+Used for self-contained content that can be independently reused, such as a blog post or a news article.
+
+Example:
+
+html
+複製程式碼
+<article>
+  <h2>How to Learn HTML</h2>
+  <p>HTML is the foundation of web development. Start by learning the basic structure and semantic elements...</p>
+</article>
+4. <section>
+Defines a thematic grouping of content, typically with a heading. It’s used for sections of a document.
+
+Example:
+
+html
+複製程式碼
+<section>
+  <h2>Our Services</h2>
+  <p>We offer web development, design, and marketing services.</p>
+</section>
+5. <aside>
+Represents content tangentially related to the main content, such as sidebars, pull quotes, or advertisements.
+
+Example:
+
+html
+複製程式碼
+<aside>
+  <h3>Related Articles</h3>
+  <ul>
+    <li><a href="#article1">Introduction to CSS</a></li>
+    <li><a href="#article2">JavaScript Basics</a></li>
+  </ul>
+</aside>
+6. <footer>
+Defines the footer of a document or section, typically containing metadata, copyright information, or links.
+
+Example:
+
+html
+複製程式碼
+<footer>
+  <p>&copy; 2024 My Website. All rights reserved.</p>
+</footer>
+7. <main>
+Used for the main content of a document, excluding repeated elements like headers, sidebars, or footers.
+
+Example:
+
+html
+複製程式碼
+<main>
+  <h1>Welcome to Our Website</h1>
+  <p>Here you’ll find the best resources for learning web development.</p>
+</main>
+8. <figure> and <figcaption>
+Used for images, diagrams, or illustrations, with an optional caption.
+
+Example:
+
+html
+複製程式碼
+<figure>
+  <img src="image.jpg" alt="A beautiful landscape">
+  <figcaption>A beautiful landscape during sunset.</figcaption>
+</figure>
+9. <time>
+Represents a specific point in time or duration.
+
+Example:
+
+html
+複製程式碼
+<time datetime="2024-12-20">December 20, 2024</time>
+10. <mark>
+Highlights text that is relevant or important.
+
+Example:
+
+html
+複製程式碼
+<p>Please note the <mark>deadline</mark> for submissions is tomorrow.</p>
+Why Use Semantic HTML?
+Accessibility: Screen readers and assistive devices can better interpret semantic tags.
+SEO: Search engines better understand page structure and prioritize meaningful content.
+Maintainability: Developers can read and maintain the code more easily.
+Standards Compliance: It follows W3C standards for modern web development.
+By using these semantic HTML elements, you can build cleaner, more accessible, and better-structured web pages.
+```
 
 ## 8. SEO Html
 
@@ -236,4 +359,107 @@ write down HTML base structure. Note. Mobile friendly first.
 <body>
 <!- HTML structure start -->
 </body>
+```
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A detailed page showcasing item photos, descriptions, and features.">
+  <meta name="keywords" content="item photos, product details, descriptions, features">
+  <title>Item Details Page</title>
+  <style>
+    /* Minimal CSS for mobile-first */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    header, footer {
+      background-color: #f4f4f4;
+      padding: 10px;
+      text-align: center;
+    }
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 10px;
+    }
+    .photos, .details {
+      flex: 1 1 100%; /* Default to full width on mobile */
+      margin: 10px 0;
+    }
+    .details {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .item-detail, .item-desc-list {
+      flex: 1 1 100%; /* Default to full width on mobile */
+      margin: 5px 0;
+    }
+    @media (min-width: 768px) {
+      .photos {
+        flex: 2; /* Take 2/3 width on larger screens */
+      }
+      .details {
+        flex: 1; /* Take 1/3 width */
+      }
+      .item-detail, .item-desc-list {
+        flex: 1 1 50%; /* Split the details into two columns */
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+      <h1>Logo</h1>
+    </div>
+    <nav class="menu">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Item Photos Slide Section -->
+    <section class="photos">
+      <h2>Item Photos</h2>
+      <p>[Image slider here]</p>
+    </section>
+
+    <!-- Item Details Section -->
+    <section class="details">
+      <div class="item-detail">
+        <h2>Item Details</h2>
+        <p>Here are the detailed features of the item...</p>
+      </div>
+      <div class="item-desc-list">
+        <h2>Item Description List</h2>
+        <ul>
+          <li>Desc 1</li>
+          <li>Desc 2</li>
+          <li>Desc 3</li>
+          <li>... etc.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2024 Item Details Page. All rights reserved.</p>
+  </footer>
+</body>
+</html>
+
 ```
