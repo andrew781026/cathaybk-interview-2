@@ -142,27 +142,70 @@ function getUniqueNumber(items) {
 
 ## 4. HTML Tag
 
-> What is different between <section> and <article>, can you make an example how you
+> What is different between `<section>` and `<article>`, can you make an example how you
 will be using it?
 
 ### answer
 
+- article 適合內容較完整且能獨立使用（例如：文章、新聞、視頻），任何可獨立存在的區塊。
+- section 適合用來區分有主題性或是明確意義的區塊（例如：一個章節、一個段落、聯絡資訊區塊），完整性比較不高且通常帶有標題（h1~h6）。
+
+```html
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section vs Article Example</title>
+</head>
+<body>
+    <header>
+        <h1>My Blog</h1>
+    </header>
+
+    <!-- Section Example -->
+    <section>
+        <h2>Technology Updates</h2>
+        <p>This section covers the latest updates in technology.</p>
+
+        <!-- Article Example 1 -->
+        <article>
+            <h3>AI in 2024</h3>
+            <p>Artificial Intelligence has reached new milestones this year...</p>
+        </article>
+
+        <!-- Article Example 2 -->
+        <article>
+            <h3>Quantum Computing</h3>
+            <p>Quantum computers are now accessible to more researchers...</p>
+        </article>
+    </section>
+
+    <!-- Another Section -->
+    <section>
+        <h2>Health and Wellness</h2>
+        <p>Discover the latest tips and trends in health and wellness.</p>
+
+        <!-- Article Example -->
+        <article>
+            <h3>Yoga for Stress Relief</h3>
+            <p>Practicing yoga daily can significantly reduce stress...</p>
+        </article>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 My Blog</p>
+    </footer>
+</body>
+</html>
 ```
-The <section> and <article> tags in HTML have distinct purposes and are used to structure content semantically:
 
-Key Differences
-<section>:
 
-Represents a thematic grouping of content, typically with a heading.
-Used for grouping related content within a document.
-Often serves as a container for multiple <article> elements or other grouped elements.
-Examples: a chapter of a book, a tab in a multi-tab interface, or a section in a report.
-<article>:
+參考資訊 :
+- section: https://html.spec.whatwg.org/multipage/sections.html#the-section-element
+- article: https://html.spec.whatwg.org/multipage/sections.html#the-article-element
 
-Represents a self-contained, reusable piece of content that could stand alone outside the document.
-Typically used for blog posts, news articles, or forum posts.
-Content within <article> should make sense on its own and be shareable independently.
-```
+
 
 ## 5. css boxing model
 
@@ -170,6 +213,8 @@ Content within <article> should make sense on its own and be shareable independe
 consists of.
 
 ### answer
+
+下方是 內容(content)、內距 (padding)、邊框 (border) 和外距 (margin) 的示意圖。
 
 ```
 +-------------------------------+
@@ -186,15 +231,17 @@ consists of.
 +-------------------------------+
 ```
 
+盒子模式(box-sizing)有兩種，一種是 `content-box; (預設值)` 另一種是 `border-box;`
+
+如果設定 width:200px , padding:8px , border:1px
+
 #### box-sizing: content-box; (預設值)
 
-The width and height properties set the dimensions of the content only.
-Total size = width + padding + border + margin.
+實際寬度是 200px + 8px*2 + 1px*2 
 
 #### box-sizing: border-box;
 
-The width and height include padding and border.
-Total size = specified width + margin.
+實際寬度是 200px
 
 ---
 
@@ -223,14 +270,11 @@ stylesheet.
 > Can you introducing some of Semantic HTML elements that you already know and how you
 used it ever, please make some example.
 
-```
-1. <header>
-Represents the header of a document or section. It often contains introductory content, navigation links, or logos.
+- 參考資料 : https://html5doctor.com/resources/#flowchart
 
-Example:
+#### 1. <header> 頁首
 
-html
-複製程式碼
+```html
 <header>
   <h1>My Website</h1>
   <nav>
@@ -241,110 +285,93 @@ html
     </ul>
   </nav>
 </header>
-2. <nav>
-Represents a block of navigation links, typically to other parts of the site or page.
+```
 
-Example:
+#### 2. <nav> 導覽列
 
-html
-複製程式碼
+```html
 <nav>
-  <ul>
-    <li><a href="#section1">Section 1</a></li>
-    <li><a href="#section2">Section 2</a></li>
-    <li><a href="#section3">Section 3</a></li>
-  </ul>
+<ul>
+  <li><a href="#home">Home</a></li>
+  <li><a href="#about">About</a></li>
+  <li><a href="#contact">Contact</a></li>
+</ul>
 </nav>
-3. <article>
-Used for self-contained content that can be independently reused, such as a blog post or a news article.
+```
 
-Example:
+#### 3. <aside> 側邊欄
 
-html
-複製程式碼
-<article>
-  <h2>How to Learn HTML</h2>
-  <p>HTML is the foundation of web development. Start by learning the basic structure and semantic elements...</p>
-</article>
-4. <section>
-Defines a thematic grouping of content, typically with a heading. It’s used for sections of a document.
-
-Example:
-
-html
-複製程式碼
-<section>
-  <h2>Our Services</h2>
-  <p>We offer web development, design, and marketing services.</p>
-</section>
-5. <aside>
-Represents content tangentially related to the main content, such as sidebars, pull quotes, or advertisements.
-
-Example:
-
-html
-複製程式碼
+```html
 <aside>
-  <h3>Related Articles</h3>
-  <ul>
-    <li><a href="#article1">Introduction to CSS</a></li>
-    <li><a href="#article2">JavaScript Basics</a></li>
-  </ul>
+    <h3>Related Articles</h3>
+    <ul>
+        <li><a href="#article1">Introduction to CSS</a></li>
+        <li><a href="#article2">JavaScript Basics</a></li>
+    </ul>
 </aside>
-6. <footer>
-Defines the footer of a document or section, typically containing metadata, copyright information, or links.
+```
 
-Example:
+#### 4. <main> 主要內容
 
-html
-複製程式碼
+```html
+<main>
+    <h1>Welcome to Our Website</h1>
+    <p>Here you’ll find the best resources for learning web development.</p>
+</main>
+```
+
+#### 5. `<figure>` and `<figcaption>` 圖文說明塊
+
+```html
+ <figure>
+    <img src="image.jpg" alt="A beautiful landscape">
+    <figcaption>A beautiful landscape during sunset.</figcaption>
+</figure>
+```
+
+#### 6. `<kbd>` - Keyboard Input element
+
+```html
+<p>Please press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd> to re-render an MDN page.</p>
+```
+
+#### 7. `<form>` 表單
+
+```html
+<form action="" method="get" class="form-example">
+    <div class="form-example">
+        <label for="name">Enter your name: </label>
+        <input type="text" name="name" id="name" required />
+    </div>
+    <div class="form-example">
+        <label for="email">Enter your email: </label>
+        <input type="email" name="email" id="email" required />
+    </div>
+    <div class="form-example">
+        <input type="submit" value="Subscribe!" />
+    </div>
+</form>
+```
+
+#### 8. `<blockquote>` The Block Quotation element
+
+> 區塊性的說明 , 引用的原話
+
+```html
+<div>
+    <blockquote cite="https://www.huxley.net/bnw/four.html">
+        <p>Words can be like X-rays, if you use them properly—they’ll go through anything. You read and you’re pierced.</p>
+    </blockquote>
+    <p>—Aldous Huxley, <cite>Brave New World</cite></p>
+</div>
+```
+
+#### 9. <footer> 頁尾
+
+```html
 <footer>
   <p>&copy; 2024 My Website. All rights reserved.</p>
 </footer>
-7. <main>
-Used for the main content of a document, excluding repeated elements like headers, sidebars, or footers.
-
-Example:
-
-html
-複製程式碼
-<main>
-  <h1>Welcome to Our Website</h1>
-  <p>Here you’ll find the best resources for learning web development.</p>
-</main>
-8. <figure> and <figcaption>
-Used for images, diagrams, or illustrations, with an optional caption.
-
-Example:
-
-html
-複製程式碼
-<figure>
-  <img src="image.jpg" alt="A beautiful landscape">
-  <figcaption>A beautiful landscape during sunset.</figcaption>
-</figure>
-9. <time>
-Represents a specific point in time or duration.
-
-Example:
-
-html
-複製程式碼
-<time datetime="2024-12-20">December 20, 2024</time>
-10. <mark>
-Highlights text that is relevant or important.
-
-Example:
-
-html
-複製程式碼
-<p>Please note the <mark>deadline</mark> for submissions is tomorrow.</p>
-Why Use Semantic HTML?
-Accessibility: Screen readers and assistive devices can better interpret semantic tags.
-SEO: Search engines better understand page structure and prioritize meaningful content.
-Maintainability: Developers can read and maintain the code more easily.
-Standards Compliance: It follows W3C standards for modern web development.
-By using these semantic HTML elements, you can build cleaner, more accessible, and better-structured web pages.
 ```
 
 ## 8. SEO Html
