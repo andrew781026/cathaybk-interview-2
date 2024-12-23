@@ -59,12 +59,12 @@ const DayButton = styled.button<{
   }
 `;
 
-interface DatePickerProps {
+export type DatePickerProps = {
   limitStartDate?: Date;
   limitEndDate?: Date;
   disabledDate?: (date: Date) => boolean;
   onDateChange?: (startDate?: Date, endDate?: Date) => void;
-}
+};
 
 // React Component
 const DatePicker: React.FC<DatePickerProps> = (props) => {

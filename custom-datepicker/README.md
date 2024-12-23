@@ -55,7 +55,4 @@ npm run build
 
 ### More ?
 
-- git hash after build display => known what version is on prod using
-- storybook , show how to use
-- jest , test dayjs function
-- React Testing Library , snapshot . smock-test
+- vitest to test react component
