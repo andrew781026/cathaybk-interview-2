@@ -9,6 +9,7 @@ const commitHash = child.execSync('git rev-parse HEAD').toString();
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: '/cathaybk-interview-2/',
   define: {
     __COMMIT_HASH__: JSON.stringify(commitHash),
   },
