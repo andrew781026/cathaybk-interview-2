@@ -392,100 +392,121 @@ write down HTML base structure. Note. Mobile friendly first.
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A detailed page showcasing item photos, descriptions, and features.">
-  <meta name="keywords" content="item photos, product details, descriptions, features">
-  <title>Item Details Page</title>
-  <style>
-    /* Minimal CSS for mobile-first */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-    }
-    header, footer {
-      background-color: #f4f4f4;
-      padding: 10px;
-      text-align: center;
-    }
-    main {
-      display: flex;
-      flex-wrap: wrap;
-      padding: 10px;
-    }
-    .photos, .details {
-      flex: 1 1 100%; /* Default to full width on mobile */
-      margin: 10px 0;
-    }
-    .details {
-      display: flex;
-      flex-wrap: wrap;
-    }
-    .item-detail, .item-desc-list {
-      flex: 1 1 100%; /* Default to full width on mobile */
-      margin: 5px 0;
-    }
-    @media (min-width: 768px) {
-      .photos {
-        flex: 2; /* Take 2/3 width on larger screens */
-      }
-      .details {
-        flex: 1; /* Take 1/3 width */
-      }
-      .item-detail, .item-desc-list {
-        flex: 1 1 50%; /* Split the details into two columns */
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A detailed page showcasing item photos, descriptions, and features.">
+    <meta name="keywords" content="item photos, product details, descriptions, features">
+    <title>Item Details Page</title>
+    <style>
+        /* Minimal CSS for mobile-first */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header, footer {
+            background-color: #f4f4f4;
+            padding: 10px;
+            text-align: center;
+        }
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 10px;
+            flex-grow: 1;
+        }
+
+        .menu li{
+            list-style: none;
+        }
+
+        .menu > ul{
+            padding: 0;
+        }
+
+        .photos, .details {
+            flex: 1 1 100%; /* Default to full width on mobile */
+            margin: 10px 0;
+        }
+        .details {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .item-detail, .item-desc-list {
+            flex: 1 1 100%; /* Default to full width on mobile */
+            margin: 5px 0;
+        }
+        @media (min-width: 768px) {
+            .photos {
+                flex: 2; /* Take 2/3 width on larger screens */
+            }
+            .details {
+                flex: 1; /* Take 1/3 width */
+            }
+            .item-detail, .item-desc-list {
+                flex: 1 1 50%; /* Split the details into two columns */
+            }
+            .menu ul {
+                display: flex;
+                gap: 16px;
+            }
+            header{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 8px 32px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Header Section -->
-  <header>
+<!-- Header Section -->
+<header>
     <div class="logo">
-      <h1>Logo</h1>
+        <h1>Logo</h1>
     </div>
     <nav class="menu">
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </nav>
-  </header>
+</header>
 
-  <!-- Main Content -->
-  <main>
+<!-- Main Content -->
+<main>
     <!-- Item Photos Slide Section -->
     <section class="photos">
-      <h2>Item Photos</h2>
-      <p>[Image slider here]</p>
+        <h2>Item Photos</h2>
+        <p>[Image slider here]</p>
     </section>
 
     <!-- Item Details Section -->
     <section class="details">
-      <div class="item-detail">
-        <h2>Item Details</h2>
-        <p>Here are the detailed features of the item...</p>
-      </div>
-      <div class="item-desc-list">
-        <h2>Item Description List</h2>
-        <ul>
-          <li>Desc 1</li>
-          <li>Desc 2</li>
-          <li>Desc 3</li>
-          <li>... etc.</li>
-        </ul>
-      </div>
+        <div class="item-detail">
+            <h2>Item Details</h2>
+            <p>Here are the detailed features of the item...</p>
+        </div>
+        <div class="item-desc-list">
+            <h2>Item Description List</h2>
+            <ul>
+                <li>Desc 1</li>
+                <li>Desc 2</li>
+                <li>Desc 3</li>
+                <li>... etc.</li>
+            </ul>
+        </div>
     </section>
-  </main>
+</main>
 
-  <!-- Footer Section -->
-  <footer>
-    <p>&copy; 2024 Item Details Page. All rights reserved.</p>
-  </footer>
+<!-- Footer Section -->
+<footer>
+    <p>&copy; 2024 Andrew Store. All rights reserved.</p>
+</footer>
 </body>
 </html>
 

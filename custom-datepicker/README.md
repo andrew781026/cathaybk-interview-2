@@ -52,3 +52,10 @@ npm run build
 | limitEndDate   | the end date can select                         | X        | Date                 |
 | disabledDate   | Specify the date that cannot be selected        | X        | (date: Date) => boolean |
 | onDateChange   | Callback when selected start or end date change | X        | (startDate?: Date, endDate?: Date) => void |
+
+### More ?
+
+- git hash after build display => known what version is on prod using
+- storybook , show how to use
+- jest , test dayjs function
+- React Testing Library , snapshot . smock-test

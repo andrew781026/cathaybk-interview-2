@@ -27,6 +27,15 @@
             padding: 10px;
             flex-grow: 1;
         }
+
+        .menu li{
+            list-style: none;
+        }
+
+        .menu > ul{
+            padding: 0;
+        }
+
         .photos, .details {
             flex: 1 1 100%; /* Default to full width on mobile */
             margin: 10px 0;
@@ -48,6 +57,16 @@
             }
             .item-detail, .item-desc-list {
                 flex: 1 1 50%; /* Split the details into two columns */
+            }
+            .menu ul {
+                display: flex;
+                gap: 16px;
+            }
+            header{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 8px 32px;
             }
         }
     </style>
