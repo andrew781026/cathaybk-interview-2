@@ -1,50 +1,54 @@
-# React + TypeScript + Vite
+# Date-Picker 元件
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+根據條件製作 Date-Picker
 
-Currently, two official plugins are available:
+### install dependency
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+```shell
+npm i 
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### develop
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react';
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-});
+```shell
+npm run dev
 ```
+
+### build
+
+```shell
+npm run build
+```
+
+## How to using DatePicker
+
+#### limit current month can select
+
+```tsx
+<DatePicker
+    limitStartDate={dayjs().startOf('month').toDate()}
+    limitEndDate={dayjs().endOf('month').toDate()}
+    onDateChange={(startDate, endDate) => {
+        setPickDateRange1([startDate, endDate]);
+    }}
+/>
+```
+
+#### select as across month
+
+```tsx
+<DatePicker
+    onDateChange={(startDate, endDate) => {
+        setPickDateRange2([startDate, endDate]);
+    }}
+/>
+```
+
+### API
+
+| Property       | Description                                     | Required | Type                 |
+|----------------|-------------------------------------------------|----------|----------------------|
+| limitStartDate | the start date can select                       | X        | Date                 |
+| limitEndDate   | the end date can select                         | X        | Date                 |
+| disabledDate   | Specify the date that cannot be selected        | X        | (date: Date) => boolean |
+| onDateChange   | Callback when selected start or end date change | X        | (startDate?: Date, endDate?: Date) => void |
