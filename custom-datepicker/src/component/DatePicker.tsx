@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import dayjs, { Dayjs } from 'dayjs';
 import { noop } from '@/helper/noop.ts';
@@ -62,7 +62,7 @@ const DayButton = styled.button<{
 export type DatePickerProps = {
   limitStartDate?: Date;
   limitEndDate?: Date;
-  disabledDate?: (date: Date) => boolean;
+  // disabledDate?: (date: Date) => boolean;
   onDateChange?: (startDate?: Date, endDate?: Date) => void;
 };
 
@@ -84,6 +84,15 @@ const DatePicker: React.FC<DatePickerProps> = (props) => {
         getWeekArray(startOfWeek)
       ),
     [lookingMonth]
+  );
+
+  const checkDisabledDate = useCallback(
+    (day: dayjs.Dayjs): boolean => {
+      if (day.isBefore(dayjs(props.limitStartDate), 'day')) return true;
+      else if (day.isAfter(dayjs(props.limitEndDate), 'day')) return true;
+      else return false;
+    },
+    [props.limitStartDate, props.limitEndDate]
   );
 
   const isPrevDisabled = useMemo(() => {
@@ -132,9 +141,10 @@ const DatePicker: React.FC<DatePickerProps> = (props) => {
   const prevMonth = () => setLookingMonth(dayjs(lookingMonth).add(-1, 'month'));
   const nextMonth = () => setLookingMonth(dayjs(lookingMonth).add(1, 'month'));
   const pickDate = (target: Dayjs) => () => {
-    if (startDate && target.isSame(startDate, 'day'))
-      return setStartDate(undefined);
-    if (endDate && target.isSame(endDate, 'day')) return setEndDate(undefined);
+    // 追加反選邏輯(不過 endDate 選擇 , 會違反題目要求 , 將其註解)
+    // if (startDate && target.isSame(startDate, 'day'))
+    //   return setStartDate(undefined);
+    // if (endDate && target.isSame(endDate, 'day')) return setEndDate(undefined);
 
     if (!startDate) return setStartDate(target.toDate());
     if (startDate && target.isBefore(startDate, 'day'))
@@ -177,9 +187,7 @@ const DatePicker: React.FC<DatePickerProps> = (props) => {
               isActive={checkIsActive(day)}
               isNonCurrentMonth={!day.isSame(lookingMonth, 'month')}
               onClick={pickDate(day)}
-              disabled={
-                props.disabledDate ? props.disabledDate(day.toDate()) : false
-              }
+              disabled={checkDisabledDate(day)}
             >
               {day.format('D日')}
             </DayButton>
