@@ -35,21 +35,21 @@ const MonthSelect = styled.button`
 `;
 
 const DayButton = styled.button<{
-  isToday?: boolean;
-  isActive?: boolean;
-  isNonCurrentMonth?: boolean;
+  'data-today'?: boolean;
+  'data-active'?: boolean;
+  'data-non-current-month'?: boolean;
 }>`
   width: 50px;
   height: 36px;
   border: none;
   background-color: ${(props) => {
-    if (props.isToday) return '#ffff76';
-    else if (props.isActive) return '#006edc';
+    if (props['data-today']) return '#ffff76';
+    else if (props['data-active']) return '#006edc';
     else return 'white';
   }};
   color: ${(props) => {
-    if (props.isNonCurrentMonth) return '#757575';
-    else if (props.isActive && !props.isToday) return 'white';
+    if (props['data-non-current-month']) return '#757575';
+    else if (props['data-active'] && !props['data-today']) return 'white';
     else return 'black';
   }};
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
@@ -195,19 +195,21 @@ const DatePicker: React.FC<DatePickerProps> = (props) => {
           key={`${title}-${index}`}
           style={{ display: 'flex', flexWrap: 'wrap' }}
         >
-          {weekArray.map((day) => (
-            <DayButton
-              key={day.format('YYYY-MM-DD')}
-              data-testid={day.format('YYYY-MM-DD')}
-              isToday={day.isSame(new Date(), 'd')}
-              isActive={checkIsActive(day)}
-              isNonCurrentMonth={!day.isSame(lookingMonth, 'month')}
-              onClick={pickDate(day)}
-              disabled={checkDisabledDate(day)}
-            >
-              {day.format('D日')}
-            </DayButton>
-          ))}
+          {weekArray.map((day) => {
+            return (
+              <DayButton
+                key={day.format('YYYY-MM-DD')}
+                data-testid={day.format('YYYY-MM-DD')}
+                data-today={day.isSame(new Date(), 'd')}
+                data-active={checkIsActive(day)}
+                data-non-current-month={!day.isSame(lookingMonth, 'month')}
+                onClick={pickDate(day)}
+                disabled={checkDisabledDate(day)}
+              >
+                {day.format('D日')}
+              </DayButton>
+            );
+          })}
         </div>
       ))}
     </Layout>

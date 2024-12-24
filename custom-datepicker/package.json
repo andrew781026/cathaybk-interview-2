@@ -10,7 +10,6 @@
     "preview": "vite preview",
     "prettier": "prettier --write .",
     "test": "vitest",
-    "test:browser": "vitest --workspace=vitest.workspace.ts",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -40,6 +39,7 @@
     "eslint-plugin-storybook": "^0.11.1",
     "globals": "^15.13.0",
     "jsdom": "^25.0.1",
+    "mockdate": "^3.0.5",
     "playwright": "^1.49.1",
     "postcss": "^8.4.49",
     "prettier": "3.4.2",

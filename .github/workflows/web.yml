@@ -49,11 +49,13 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: build project
-        run: npm run build
+        run: |
+          npm run build
+          npm run build-storybook
 
       # use actions-gh-pages to deploy dist to gh-pages
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./custom-datepicker/dist
+          publish_dir: ./custom-datepicker/storybook-static
