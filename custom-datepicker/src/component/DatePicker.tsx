@@ -62,7 +62,6 @@ const DayButton = styled.button<{
 export type DatePickerProps = {
   limitStartDate?: Date;
   limitEndDate?: Date;
-  // disabledDate?: (date: Date) => boolean;
   onDateChange?: (startDate?: Date, endDate?: Date) => void;
 };
 
@@ -88,8 +87,16 @@ const DatePicker: React.FC<DatePickerProps> = (props) => {
 
   const checkDisabledDate = useCallback(
     (day: dayjs.Dayjs): boolean => {
-      if (day.isBefore(dayjs(props.limitStartDate), 'day')) return true;
-      else if (day.isAfter(dayjs(props.limitEndDate), 'day')) return true;
+      if (
+        props.limitStartDate &&
+        day.isBefore(dayjs(props.limitStartDate), 'day')
+      )
+        return true;
+      else if (
+        props.limitEndDate &&
+        day.isAfter(dayjs(props.limitEndDate), 'day')
+      )
+        return true;
       else return false;
     },
     [props.limitStartDate, props.limitEndDate]
@@ -167,11 +174,19 @@ const DatePicker: React.FC<DatePickerProps> = (props) => {
   return (
     <Layout key={title}>
       <Header>
-        <MonthSelect onClick={prevMonth} disabled={isPrevDisabled}>
+        <MonthSelect
+          data-testid="prev-month"
+          onClick={prevMonth}
+          disabled={isPrevDisabled}
+        >
           &lt;
         </MonthSelect>
         <span>{title}</span>
-        <MonthSelect onClick={nextMonth} disabled={isNextDisabled}>
+        <MonthSelect
+          data-testid="next-month"
+          onClick={nextMonth}
+          disabled={isNextDisabled}
+        >
           &gt;
         </MonthSelect>
       </Header>
@@ -183,6 +198,7 @@ const DatePicker: React.FC<DatePickerProps> = (props) => {
           {weekArray.map((day) => (
             <DayButton
               key={day.format('YYYY-MM-DD')}
+              data-testid={day.format('YYYY-MM-DD')}
               isToday={day.isSame(new Date(), 'd')}
               isActive={checkIsActive(day)}
               isNonCurrentMonth={!day.isSame(lookingMonth, 'month')}
